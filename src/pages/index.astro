@@ -1,0 +1,51 @@
+---
+import Nav from '../components/Nav.astro';
+import Layout from '../layouts/Layout.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import About from '../components/About.astro';
+const pageTitle = "Portfolio - Index"
+const name:string  ="Youris";
+---
+	
+
+
+<Layout pageTitle={pageTitle}>         
+	
+	<section class="flex justify-center items-center h-screen text-white bg-gray-900">
+		<h1 id="me" class="text-5xl">Hello, I'm <span class="text-orange-500">{name}</span> <br> I'm a <span class="text-blue-500">Fullstack</span> Web Developer </h1>
+	</section>
+
+
+
+	<div class="relative">
+		<Nav />
+		<About />
+		<Projects />
+		<Contact />
+	</div>
+
+</Layout>
+
+
+<script>
+	window.addEventListener('scroll', function() {
+	   const nav: HTMLElement | null = document.querySelector('nav');
+	   const aboutSection: HTMLElement | null = document.querySelector('#about');
+	   const contactSection: HTMLElement | null = document.querySelector('#contact');
+ 
+	   if (nav && aboutSection && contactSection) {
+		  const aboutPosition: number = aboutSection.getBoundingClientRect().top;
+ 
+		  if (aboutPosition <= 0) {
+			 nav.classList.remove('nav-hidden');
+			 nav.classList.add('nav-visible');
+		  } else {
+			 nav.classList.remove('nav-visible');
+			 nav.classList.add('nav-hidden');
+		  }
+	   }
+	});
+ </script>
+ 
+ 

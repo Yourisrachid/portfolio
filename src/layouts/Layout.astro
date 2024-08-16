@@ -1,0 +1,26 @@
+---
+
+import Head from '../components/Head.astro';
+
+
+const { pageTitle } = Astro.props as { pageTitle: string };
+
+---
+
+<html class="scroll-smooth text-white bg-gray-900" lang="en">
+
+    <Head pageTitle={pageTitle} />
+
+
+
+  <body>
+	<div class="background-container">
+		<div class="stars"></div>
+		<div class="twinkling"></div>
+		<div class="clouds"></div>
+    <div class="text-center h-screen text-white bg-gray-900" >
+		<slot />
+	</div>
+	</div>
+  </body>
+</html>
