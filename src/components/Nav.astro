@@ -1,4 +1,4 @@
-<nav class="sticky top-0 z-50 w-full bg-gray-800 text-white py-2 opacity-85">
+<nav class="font-plex sticky top-0 z-50 w-full bg-gray-800 text-white py-2 opacity-85">
   <div class="container mx-auto flex justify-center md:justify-end items-center px-4 md:px-10">
     <div class="space-x-4 md:space-x-6 flex">
       <a id="nav-home" href="/#" class="hover:text-orange-400 transition duration-300 ease-in-out px-2 md:px-4 py-2">
@@ -18,15 +18,9 @@
 </nav>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const sections: Record<string, HTMLElement | null> = {
-      home: document.querySelector('#me'),
-      about: document.querySelector('#about'),
-      projects: document.querySelector('#projects'),
-      contact: document.querySelector('#contact'),
-    };
-
-    const navLinks: Record<string, HTMLElement | null> = {
+  document.addEventListener("DOMContentLoaded", function() {
+    const sections: NodeListOf<HTMLElement> = document.querySelectorAll("section");
+    const navLinks: { [key in "home" | "about" | "projects" | "contact"]: HTMLElement | null } = {
       home: document.getElementById('nav-home'),
       about: document.getElementById('nav-about'),
       projects: document.getElementById('nav-projects'),
@@ -34,20 +28,22 @@
     };
 
     const options = {
-      threshold: 0.5,
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const sectionId = entry.target.id;
           for (const link in navLinks) {
-            const linkElement = navLinks[link];
+            const linkElement = navLinks[link as "home" | "about" | "projects" | "contact"];
             if (linkElement) {
               linkElement.classList.remove('text-[#49d1ba]');
             }
           }
-          const activeLink = navLinks[sectionId];
+          const id = entry.target.getAttribute('id') as "home" | "about" | "projects" | "contact";
+          const activeLink = navLinks[id];
           if (activeLink) {
             activeLink.classList.add('text-[#49d1ba]');
           }
@@ -55,12 +51,9 @@
       });
     }, options);
 
-    for (const section in sections) {
-      const sectionElement = sections[section];
-      if (sectionElement) {
-        observer.observe(sectionElement);
-      }
-    }
+    sections.forEach(section => {
+      observer.observe(section);
+    });
   });
 </script>
 
