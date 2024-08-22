@@ -1,26 +1,23 @@
 ---
-
 import Head from '../components/Head.astro';
+import ParticlesBackground from '../components/ParticlesBackground.astro';
 
 
 const { pageTitle } = Astro.props as { pageTitle: string };
-
 ---
 
-<html class="scroll-smooth text-white bg-gray-900" lang="en">
+<html class="scroll-smooth text-white bg-gray-950" lang="en">
 
-    <Head pageTitle={pageTitle} />
+  <Head pageTitle={pageTitle} />
+
+  <body class="relative">
+
+	<ParticlesBackground />
 
 
 
-  <body>
-	<div class="background-container">
-		<div class="stars"></div>
-		<div class="twinkling"></div>
-		<div class="clouds"></div>
-    <div class="text-center h-screen text-white bg-gray-900" >
-		<slot />
-	</div>
-	</div>
+    <div class="text-center h-screen">
+      <slot />
+    </div>
   </body>
 </html>
